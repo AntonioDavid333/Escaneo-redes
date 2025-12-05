@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import scanner_redes.dto.RedRequestDTO;
-import scanner_redes.dto.RedResponseDTO;
+import scanner_redes.dto.ComprobacionRequestDTO;
+import scanner_redes.dto.ComprobacionResponseDTO;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,14 +14,14 @@ import java.util.List;
 
 @RestController
 public class TelemetriaController {
-    List<RedResponseDTO> redes=new ArrayList<>();
+    List<ComprobacionResponseDTO> redes=new ArrayList<>();
 
     @PostMapping("/telemetria")
-    public ResponseEntity<?> registrarTelemetria(@RequestBody RedRequestDTO red){
+    public ResponseEntity<?> registrarTelemetria(@RequestBody ComprobacionRequestDTO red){
         if (red==null){
             return ResponseEntity.badRequest().body("No fue posible guardar la comprobación de red.");
         }
-        RedResponseDTO redAdd=new RedResponseDTO(red.getNombre(), red.getEstado(),new Date());
+        ComprobacionResponseDTO redAdd=new ComprobacionResponseDTO(red.getNombre(), red.getEstado(),new Date());
         redes.add(redAdd);
 
         return ResponseEntity.ok().body(redAdd);
