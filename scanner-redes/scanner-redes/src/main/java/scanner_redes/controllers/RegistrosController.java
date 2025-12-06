@@ -53,6 +53,7 @@ public class RegistrosController {
     "dnsServerPrimary":"escanerRedes.com"
     }*/
 
+    /*EndPoint que permite consultar la lista de redes*/
     @GetMapping("/red")
     public ResponseEntity<?> listadoRedes(){
         return ResponseEntity.ok().body(redes);
