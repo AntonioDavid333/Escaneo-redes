@@ -16,6 +16,11 @@ import java.util.List;
 public class TelemetriaController {
     List<ComprobacionResponseDTO> redes=new ArrayList<>();
 
+    /**
+     *
+     * @param red comprobacion de red
+     * @return devuelve un JSON de la comprobacion de la red añadida
+     */
     @PostMapping("/telemetria")
     public ResponseEntity<?> registrarTelemetria(@RequestBody ComprobacionRequestDTO red){
         if (red==null){
@@ -27,6 +32,10 @@ public class TelemetriaController {
         return ResponseEntity.ok().body(redAdd);
     }
 
+    /**
+     *
+     * @return devuelve una lista de comprobaciones de redes
+     */
     @GetMapping("/telemetria")
     public ResponseEntity<?> registrosTelemetria(){
         return ResponseEntity.ok().body(redes);

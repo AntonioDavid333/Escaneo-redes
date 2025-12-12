@@ -14,9 +14,13 @@ import java.util.List;
 
 @RestController
 public class RegistrosController {
-    List<RedListResponseDTO> redes= new ArrayList<>();
+    List<RedRequestDTO> redes= new ArrayList<>();
 
-
+    /**
+     *
+     * @param red nueva red registrada
+     * @return devuelve JSON con la red registrada
+     */
     @PostMapping("/red")
     public ResponseEntity<?> addRed(@RequestBody RedRequestDTO red){
         //verificar que no sea null
@@ -31,13 +35,14 @@ public class RegistrosController {
             return ResponseEntity.badRequest().body("Esta red ya está registrada");
         }
         //añadir a la lista
-        redes.add(new RedListResponseDTO(red.getSSID(), red.getPassword()));
+
         RedResponseDTO nuevaRed= new RedResponseDTO(red.getSSID(),
                 red.getNombre(),red.isDchpEnabled(),
                 red.getIpAdress(),red.getSubnetMask(),
                 red.getDefaultGetWay(),
                 red.getHostname(),
                 red.getDnsServerPrimary());
+        redes.add(red);
         return  ResponseEntity.ok().body(nuevaRed);
     }
     /*JSON PARA PROBAR:
@@ -54,6 +59,11 @@ public class RegistrosController {
     }*/
 
     /*EndPoint que permite consultar la lista de redes*/
+
+    /**
+     *
+     * @return devuelve una lista de redes
+     */
     @GetMapping("/red")
     public ResponseEntity<?> listadoRedes(){
         return ResponseEntity.ok().body(redes);

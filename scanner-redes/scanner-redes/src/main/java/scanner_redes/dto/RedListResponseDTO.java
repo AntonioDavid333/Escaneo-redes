@@ -1,8 +1,8 @@
 package scanner_redes.dto;
 
 public class RedListResponseDTO {
-    String SSID;
-    String password;
+    private String SSID;
+    private  String password;
 
     public RedListResponseDTO() {
     }
