@@ -3,23 +3,23 @@ package scanner_redes.dto;
 import java.util.Date;
 
 public class RedRequestDTO {
-    private String nombre;
+    private String ssid;
     private Estado estado;
 
     public RedRequestDTO() {
     }
 
-    public RedRequestDTO(String nombre, Estado estado) {
-        this.nombre = nombre;
+    public RedRequestDTO(String ssid, Estado estado) {
+        this.ssid = ssid;
         this.estado = estado;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getSsid() {
+        return ssid;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setSsid(String ssid) {
+        this.ssid = ssid;
     }
 
     public Estado getEstado() {

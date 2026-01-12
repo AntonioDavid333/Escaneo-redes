@@ -1,16 +1,25 @@
-package scanner_redes.dto;
+package scanner_redes.models;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import scanner_redes.dto.Estado;
 
 import java.util.Date;
-
-public class RedResponseDTO {
+@Entity @Table(name = "Redes")
+public class Red {
+    @Id
     private String ssid;
+    @Column
     private Estado estado;
+    @Column
     private Date fecha;
 
-    public RedResponseDTO() {
+    public Red() {
     }
 
-    public RedResponseDTO(String ssid, Estado estado, Date fecha) {
+    public Red(String ssid, Estado estado, Date fecha) {
         this.ssid = ssid;
         this.estado = estado;
         this.fecha=fecha;
