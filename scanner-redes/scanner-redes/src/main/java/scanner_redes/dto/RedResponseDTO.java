@@ -3,7 +3,7 @@ package scanner_redes.dto;
 public class RedResponseDTO {
 
     String ssid;
-    String nombre;
+//    String nombre;
     boolean dchpEnabled;
     String ipAdress;
     String subnetMask;
@@ -16,9 +16,9 @@ public class RedResponseDTO {
     }
 
 
-    public RedResponseDTO(String ssid, String nombre, boolean dchpEnabled, String ipAdress, String subnetMask, String defaultGetWay, String hostname, String dnsServerPrimary) {
+    public RedResponseDTO(String ssid, boolean dchpEnabled, String ipAdress, String subnetMask, String defaultGetWay, String hostname, String dnsServerPrimary) {
         this.ssid = ssid;
-        this.nombre = nombre;
+//        this.nombre = nombre;
         this.dchpEnabled = dchpEnabled;
         this.ipAdress = ipAdress;
         this.subnetMask = subnetMask;

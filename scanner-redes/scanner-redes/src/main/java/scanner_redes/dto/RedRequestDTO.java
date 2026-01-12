@@ -4,7 +4,7 @@ public class RedRequestDTO {
 
     String ssid;
     String password;
-    String nombre;
+//    String nombre;
     boolean dchpEnabled;
     String ipAdress;
     String subnetMask;
@@ -17,10 +17,10 @@ public class RedRequestDTO {
     }
 
 
-    public RedRequestDTO(String SSID, String password, String nombre, boolean dchpEnabled, String ipAdress, String subnetMask, String defaultGetWay, String dnsServerPrimary, String hostname) {
+    public RedRequestDTO(String SSID, String password, boolean dchpEnabled, String ipAdress, String subnetMask, String defaultGetWay, String dnsServerPrimary, String hostname) {
         this.ssid = SSID;
         this.password = password;
-        this.nombre = nombre;
+//        this.nombre = nombre;
         this.dchpEnabled = dchpEnabled;
         this.ipAdress = ipAdress;
         this.subnetMask = subnetMask;

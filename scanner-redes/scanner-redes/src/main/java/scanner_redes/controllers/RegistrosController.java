@@ -1,53 +1,67 @@
 package scanner_redes.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import scanner_redes.dto.RedListResponseDTO;
 import scanner_redes.dto.RedRequestDTO;
 import scanner_redes.dto.RedResponseDTO;
+import scanner_redes.models.Red;
+import scanner_redes.repositories.RedRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/redes")
 public class RegistrosController {
     List<RedRequestDTO> redes= new ArrayList<>();
+    @Autowired
+    RedRepository redRepository;
 
     /**
      *
      * @param red nueva red registrada
      * @return devuelve JSON con la red registrada
      */
-    @PostMapping("/red")
+    @PostMapping
     public ResponseEntity<?> addRed(@RequestBody RedRequestDTO red){
         //verificar que no sea null
         if(red==null){
             return ResponseEntity.badRequest().body("no se ha podido añadir la red");
         }
-        boolean existe= redes
-                .stream()
-                .anyMatch(r->r.getSsid().equals(red.getSsid()));
-        //verificar que no exista
-        if (existe){
+        if (redRepository.existsById(red.getSsid())){
             return ResponseEntity.badRequest().body("Esta red ya está registrada");
         }
+//        boolean existe= redes
+//                .stream()
+//                .anyMatch(r->r.getSsid().equals(red.getSsid()));
+//        //verificar que no exista
+//        if (existe){
+//            return ResponseEntity.badRequest().body("Esta red ya está registrada");
+//        }
         //añadir a la lista
 
-        RedResponseDTO nuevaRed= new RedResponseDTO(red.getSsid(),
-                red.getSsid(),red.isDchpEnabled(),
+//        RedResponseDTO nuevaRed= new RedResponseDTO(red.getSsid(),
+//                red.isDchpEnabled(),
+//                red.getIpAdress(),red.getSubnetMask(),
+//                red.getDefaultGetWay(),
+//                red.getHostname(),
+//                red.getDnsServerPrimary());
+//        redes.add(red);
+        Red redSave= new Red(red.getSsid(),
+                red.getPassword(),
+                red.isDchpEnabled(),
                 red.getIpAdress(),red.getSubnetMask(),
                 red.getDefaultGetWay(),
                 red.getHostname(),
                 red.getDnsServerPrimary());
-        redes.add(red);
-        return  ResponseEntity.ok().body(nuevaRed);
+
+        return  ResponseEntity.ok().body(redRepository.save(redSave));
     }
     /*JSON PARA PROBAR:
     * {
-    "SSID":"SSID",
+    "ssid":"SSID",
     "password":"password",
     "nombre": "red-01",
     "dchpEnabled": true,
@@ -64,9 +78,9 @@ public class RegistrosController {
      *
      * @return devuelve una lista de redes
      */
-    @GetMapping("/red")
+    @GetMapping
     public ResponseEntity<?> listadoRedes(){
-        return ResponseEntity.ok().body(redes);
+        return ResponseEntity.ok().body(redRepository.findAll());
     }
 
 }

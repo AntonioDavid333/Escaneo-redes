@@ -13,8 +13,8 @@ public class Red {
     String ssid;
     @Column
     String password;
-    @Column
-    String nombre;
+//    @Column
+//    String nombre;
     @Column
     boolean dchpEnabled;
     @Column
@@ -33,10 +33,10 @@ public class Red {
     }
 
 
-    public Red(String SSID, String password, String nombre, boolean dchpEnabled, String ipAdress, String subnetMask, String defaultGetWay, String dnsServerPrimary, String hostname) {
+    public Red(String SSID, String password, boolean dchpEnabled, String ipAdress, String subnetMask, String defaultGetWay, String dnsServerPrimary, String hostname) {
         this.ssid = SSID;
         this.password = password;
-        this.nombre = nombre;
+//        this.nombre = nombre;
         this.dchpEnabled = dchpEnabled;
         this.ipAdress = ipAdress;
         this.subnetMask = subnetMask;
