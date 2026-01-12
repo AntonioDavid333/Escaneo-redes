@@ -1,11 +1,8 @@
 package scanner_redes.dto;
 
 public class RedRequestDTO {
-<<<<<<< HEAD
-    private String ssid;
-    private Estado estado;
-=======
-    String SSID;
+
+    String ssid;
     String password;
     String nombre;
     boolean dchpEnabled;
@@ -14,18 +11,14 @@ public class RedRequestDTO {
     String defaultGetWay;
     String hostname;
     String dnsServerPrimary;
->>>>>>> ab20c0aaf24c84e7210fbd9917cc82dd3bfab2fa
+
 
     public RedRequestDTO() {
     }
 
-<<<<<<< HEAD
-    public RedRequestDTO(String ssid, Estado estado) {
-        this.ssid = ssid;
-        this.estado = estado;
-=======
+
     public RedRequestDTO(String SSID, String password, String nombre, boolean dchpEnabled, String ipAdress, String subnetMask, String defaultGetWay, String dnsServerPrimary, String hostname) {
-        this.SSID = SSID;
+        this.ssid = SSID;
         this.password = password;
         this.nombre = nombre;
         this.dchpEnabled = dchpEnabled;
@@ -36,12 +29,12 @@ public class RedRequestDTO {
         this.hostname = hostname;
     }
 
-    public String getSSID() {
-        return SSID;
+    public String getSsid() {
+        return ssid;
     }
 
-    public void setSSID(String SSID) {
-        this.SSID = SSID;
+    public void setSsid(String ssid) {
+        this.ssid = ssid;
     }
 
     public String getPassword() {
@@ -50,15 +43,7 @@ public class RedRequestDTO {
 
     public void setPassword(String password) {
         this.password = password;
->>>>>>> ab20c0aaf24c84e7210fbd9917cc82dd3bfab2fa
-    }
 
-    public String getSsid() {
-        return ssid;
-    }
-
-    public void setSsid(String ssid) {
-        this.ssid = ssid;
     }
 
     public boolean isDchpEnabled() {

@@ -10,19 +10,39 @@ import java.util.Date;
 @Entity @Table(name = "Redes")
 public class Red {
     @Id
-    private String ssid;
+    String ssid;
     @Column
-    private Estado estado;
+    String password;
     @Column
-    private Date fecha;
+    String nombre;
+    @Column
+    boolean dchpEnabled;
+    @Column
+    String ipAdress;
+    @Column
+    String subnetMask;
+    @Column
+    String defaultGetWay;
+    @Column
+    String hostname;
+    @Column
+    String dnsServerPrimary;
+
 
     public Red() {
     }
 
-    public Red(String ssid, Estado estado, Date fecha) {
-        this.ssid = ssid;
-        this.estado = estado;
-        this.fecha=fecha;
+
+    public Red(String SSID, String password, String nombre, boolean dchpEnabled, String ipAdress, String subnetMask, String defaultGetWay, String dnsServerPrimary, String hostname) {
+        this.ssid = SSID;
+        this.password = password;
+        this.nombre = nombre;
+        this.dchpEnabled = dchpEnabled;
+        this.ipAdress = ipAdress;
+        this.subnetMask = subnetMask;
+        this.defaultGetWay = defaultGetWay;
+        this.dnsServerPrimary = dnsServerPrimary;
+        this.hostname = hostname;
     }
 
     public String getSsid() {
@@ -33,19 +53,60 @@ public class Red {
         this.ssid = ssid;
     }
 
-    public Estado getEstado() {
-        return estado;
+    public String getPassword() {
+        return password;
     }
 
-    public void setEstado(Estado estado) {
-        this.estado = estado;
+    public void setPassword(String password) {
+        this.password = password;
+
     }
 
-    public Date getFecha() {
-        return fecha;
+    public boolean isDchpEnabled() {
+        return dchpEnabled;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setDchpEnabled(boolean dchpEnabled) {
+        this.dchpEnabled = dchpEnabled;
+    }
+
+    public String getIpAdress() {
+        return ipAdress;
+    }
+
+    public void setIpAdress(String ipAdress) {
+        this.ipAdress = ipAdress;
+    }
+
+    public String getSubnetMask() {
+        return subnetMask;
+    }
+
+    public void setSubnetMask(String subnetMask) {
+        this.subnetMask = subnetMask;
+    }
+
+    public String getDefaultGetWay() {
+        return defaultGetWay;
+    }
+
+    public void setDefaultGetWay(String defaultGetWay) {
+        this.defaultGetWay = defaultGetWay;
+    }
+
+    public String getHostname() {
+        return hostname;
+    }
+
+    public void setHostname(String hostname) {
+        this.hostname = hostname;
+    }
+
+    public String getDnsServerPrimary() {
+        return dnsServerPrimary;
+    }
+
+    public void setDnsServerPrimary(String dnsServerPrimary) {
+        this.dnsServerPrimary = dnsServerPrimary;
     }
 }

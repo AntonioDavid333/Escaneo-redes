@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import scanner_redes.models.Comprobacion;
 
 @Repository
-public interface RedRepository extends JpaRepository<Comprobacion,String> {
+public interface ComprobacionRepository extends JpaRepository<Comprobacion,String> {
 }

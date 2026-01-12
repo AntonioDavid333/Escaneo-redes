@@ -29,15 +29,15 @@ public class RegistrosController {
         }
         boolean existe= redes
                 .stream()
-                .anyMatch(r->r.getSSID().equals(red.getSSID()));
+                .anyMatch(r->r.getSsid().equals(red.getSsid()));
         //verificar que no exista
         if (existe){
             return ResponseEntity.badRequest().body("Esta red ya está registrada");
         }
         //añadir a la lista
 
-        RedResponseDTO nuevaRed= new RedResponseDTO(red.getSSID(),
-                red.getNombre(),red.isDchpEnabled(),
+        RedResponseDTO nuevaRed= new RedResponseDTO(red.getSsid(),
+                red.getSsid(),red.isDchpEnabled(),
                 red.getIpAdress(),red.getSubnetMask(),
                 red.getDefaultGetWay(),
                 red.getHostname(),

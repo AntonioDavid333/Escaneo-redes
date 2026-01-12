@@ -1,12 +1,8 @@
 package scanner_redes.dto;
 
 public class RedResponseDTO {
-<<<<<<< HEAD
-    private String ssid;
-    private Estado estado;
-    private Date fecha;
-=======
-    String SSID;
+
+    String ssid;
     String nombre;
     boolean dchpEnabled;
     String ipAdress;
@@ -14,19 +10,14 @@ public class RedResponseDTO {
     String defaultGetWay;
     String hostname;
     String dnsServerPrimary;
->>>>>>> ab20c0aaf24c84e7210fbd9917cc82dd3bfab2fa
+
 
     public RedResponseDTO() {
     }
 
-<<<<<<< HEAD
-    public RedResponseDTO(String ssid, Estado estado, Date fecha) {
+
+    public RedResponseDTO(String ssid, String nombre, boolean dchpEnabled, String ipAdress, String subnetMask, String defaultGetWay, String hostname, String dnsServerPrimary) {
         this.ssid = ssid;
-        this.estado = estado;
-        this.fecha=fecha;
-=======
-    public RedResponseDTO(String SSID, String nombre, boolean dchpEnabled, String ipAdress, String subnetMask, String defaultGetWay, String hostname, String dnsServerPrimary) {
-        this.SSID = SSID;
         this.nombre = nombre;
         this.dchpEnabled = dchpEnabled;
         this.ipAdress = ipAdress;
@@ -36,14 +27,6 @@ public class RedResponseDTO {
         this.dnsServerPrimary = dnsServerPrimary;
     }
 
-    public String getSSID() {
-        return SSID;
-    }
-
-    public void setSSID(String SSID) {
-        this.SSID = SSID;
->>>>>>> ab20c0aaf24c84e7210fbd9917cc82dd3bfab2fa
-    }
 
     public String getSsid() {
         return ssid;

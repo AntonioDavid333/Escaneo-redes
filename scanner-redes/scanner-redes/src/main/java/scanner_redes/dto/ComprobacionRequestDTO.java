@@ -1,23 +1,23 @@
 package scanner_redes.dto;
 
 public class ComprobacionRequestDTO {
-    private String nombre;
+    private String ssid;
     private Estado estado;
 
     public ComprobacionRequestDTO() {
     }
 
-    public ComprobacionRequestDTO(String nombre, Estado estado) {
-        this.nombre = nombre;
+    public ComprobacionRequestDTO(String ssid, Estado estado) {
+        this.ssid = ssid;
         this.estado = estado;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getSsid() {
+        return ssid;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setSsid(String ssid) {
+        this.ssid = ssid;
     }
 
     public Estado getEstado() {
