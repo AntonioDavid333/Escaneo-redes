@@ -1,8 +1,8 @@
 package scanner_redes.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Past;
-import scanner_redes.dto.Estado;
+//import jakarta.validation.constraints.Past;
+//import scanner_redes.dto.Estado;
 
 import java.util.Date;
 @Entity @Table(name = "redes")
