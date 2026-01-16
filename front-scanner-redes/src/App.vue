@@ -1,11 +1,11 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 
-// Estado reactivo
+
 const redes = ref([]);
 const cargando = ref(true);
 
-// Función para obtener los datos
+
 const cargarConfiguracion = async () => {
   try {
     cargando.value = true;
@@ -93,14 +93,14 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* Contenedor principal para ocupar toda la pantalla */
+
 .app-container {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
   
 }
 
-/* Header según la imagen */
+
 .header {
   background-color: #9cd2f3;
   padding: 10px 25px;
@@ -117,7 +117,7 @@ onUnmounted(() => {
   padding: 20px;
 }
 
-/* Botón estilo clásico */
+
 .btn-refresh {
   background-color: #f8f9fa;
   border: 1px solid #ced4da;
@@ -132,7 +132,7 @@ onUnmounted(() => {
   background-color: #e2e6ea;
 }
 
-/* Tabla */
+
 .table-wrapper {
   border: 1px solid #e0e0e0;
   border-radius: 4px;
@@ -159,7 +159,7 @@ onUnmounted(() => {
   font-size: 0.95rem;
 }
 
-/* Badges (Etiquetas de estado) */
+
 .badge {
   display: inline-block;
   padding: 2px 10px;
