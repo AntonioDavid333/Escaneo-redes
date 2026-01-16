@@ -17,12 +17,13 @@ import scanner_redes.dto.ComprobacionResponseDTO;
 import scanner_redes.repositories.ComprobacionRepository;
 
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/telemetria")
+@RequestMapping("/configuracion-redes")
 public class TelemetriaController {
 
     List<ComprobacionResponseDTO> comprobaciones=new ArrayList<>();
@@ -40,8 +41,8 @@ public class TelemetriaController {
             return ResponseEntity.badRequest().body("No fue posible guardar la comprobación de red.");
         }
         ComprobacionResponseDTO compAdd = new ComprobacionResponseDTO(comprobacion.getSsid(), comprobacion.getEstado(), new Date());
-        Comprobacion compSave = new Comprobacion(comprobacion.getSsid(), comprobacion.getEstado(), new Date());
-        if (comprobacionRepository.existsById(compSave.getSsid())) {
+        Comprobacion compSave = new Comprobacion(comprobacion.getSsid(), comprobacion.getEstado(), new Timestamp(new Date().getTime()));
+        if (comprobacionRepository.existsBySsid(compSave.getSsid())) {
             return ResponseEntity.badRequest().body("Esta comprobación ya está guardada");
         }
         comprobacionRepository.save(compSave);

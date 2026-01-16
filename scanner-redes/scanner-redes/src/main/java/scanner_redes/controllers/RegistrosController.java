@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/redes")
+@RequestMapping("/registros-redes")
 public class RegistrosController {
     List<RedRequestDTO> redes= new ArrayList<>();
     @Autowired
@@ -30,7 +30,7 @@ public class RegistrosController {
         if(red==null){
             return ResponseEntity.badRequest().body("no se ha podido añadir la red");
         }
-        if (redRepository.existsById(red.getSsid())){
+        if (redRepository.existsBySsid(red.getSsid())){
             return ResponseEntity.badRequest().body("Esta red ya está registrada");
         }
 //        boolean existe= redes
@@ -51,11 +51,7 @@ public class RegistrosController {
 //        redes.add(red);
         Red redSave= new Red(red.getSsid(),
                 red.getPassword(),
-                red.isDchpEnabled(),
-                red.getIpAdress(),red.getSubnetMask(),
-                red.getDefaultGetWay(),
-                red.getHostname(),
-                red.getDnsServerPrimary());
+                red.getSeguridad());
 
         return  ResponseEntity.ok().body(redRepository.save(redSave));
     }

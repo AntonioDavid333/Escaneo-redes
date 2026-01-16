@@ -7,4 +7,5 @@ import scanner_redes.models.Red;
 
 @Repository
 public interface RedRepository extends JpaRepository<Red,String> {
+    boolean existsBySsid(String ssid);
 }
