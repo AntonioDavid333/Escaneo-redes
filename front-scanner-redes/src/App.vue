@@ -1,47 +1,147 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref, onMounted } from 'vue';
+
+// Estado reactivo
+const redes = ref([]);
+const cargando = ref(true);
+
+// Función para obtener los datos
+const cargarConfiguracion = async () => {
+  try {
+    cargando.value = true;
+    const response = await fetch('http://localhost:8080/configuracion-redes');
+    if (response.ok) {
+      redes.value = await response.json();
+    }
+  } catch (error) {
+    console.error("Error al conectar con la API:", error);
+  } finally {
+    cargando.value = false;
+  }
+};
+
+onMounted(cargarConfiguracion);
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <div class="app-container">
+    <header class="header">
+      <h1>WiFi Network Status Monitor</h1>
+    </header>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+    <main class="content">
+      <button class="btn-refresh" @click="cargarConfiguracion">
+        Refresh Data
+      </button>
 
-  <main>
-    <TheWelcome />
-  </main>
+      <div class="table-wrapper">
+        <table class="network-table">
+          <thead>
+            <tr>
+              <th>Network Name (SSID)</th>
+              <th>Status</th>
+              <th>Last Check Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="red in redes" :key="red.id">
+              <td>{{ red.ssid }}</td>
+              <td>
+                <span :class="['badge', red.estado.toLowerCase() === 'ok' ? 'bg-success' : 'bg-danger']">
+                  {{ red.estado }}
+                </span>
+              </td>
+              <td>{{ red.fecha }}</td>
+            </tr>
+            <tr v-if="redes.length === 0 && !cargando">
+              <td colspan="3" style="text-align: center;">No se encontraron redes configuradas.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
+/* Contenedor principal para ocupar toda la pantalla */
+.app-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  margin: -2rem; /* Para anular márgenes por defecto de Vue si existen */
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+/* Header según la imagen */
+.header {
+  background-color: #9cd2f3;
+  padding: 10px 25px;
+  border-bottom: 1px solid #86b9d8;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.header h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 500;
 }
+
+.content {
+  padding: 20px;
+}
+
+/* Botón estilo clásico */
+.btn-refresh {
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+
+.btn-refresh:hover {
+  background-color: #e2e6ea;
+}
+
+/* Tabla */
+.table-wrapper {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.network-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+
+.network-table th {
+  text-align: left;
+  padding: 12px 15px;
+  border-bottom: 2px solid #f0f0f0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.network-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.95rem;
+}
+
+/* Badges (Etiquetas de estado) */
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  min-width: 50px;
+}
+
+.bg-success { background-color: #4caf50; } /* Verde para OK */
+.bg-danger { background-color: #d32f2f; }  /* Rojo para Failed/Error */
 </style>
