@@ -68,7 +68,7 @@ onMounted(cargarConfiguracion);
 .app-container {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
-  margin: -2rem; /* Para anular márgenes por defecto de Vue si existen */
+  
 }
 
 /* Header según la imagen */

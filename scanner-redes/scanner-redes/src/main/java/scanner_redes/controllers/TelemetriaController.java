@@ -24,6 +24,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/configuracion-redes")
+@CrossOrigin(origins = "http://localhost:5173")
 public class TelemetriaController {
 
     List<ComprobacionResponseDTO> comprobaciones=new ArrayList<>();
