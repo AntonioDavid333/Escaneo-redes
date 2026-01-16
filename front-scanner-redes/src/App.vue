@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
 // Estado reactivo
 const redes = ref([]);
@@ -20,7 +20,35 @@ const cargarConfiguracion = async () => {
   }
 };
 
-onMounted(cargarConfiguracion);
+const estadoClase = (estado) => {
+  switch (estado) {
+    case 'CONNECTED':
+      return 'bg-success';
+    case 'AUTHFAIL':
+      return 'bg-warning';
+    case 'NOSIGNAL':
+      return 'bg-danger';
+    default:
+      return 'bg-secondary';
+  }
+};
+let intervalId = null;
+
+
+onMounted(() => {
+  cargarConfiguracion(); // llamada inicial
+
+  intervalId = setInterval(() => {
+    cargarConfiguracion();
+  }, 20000); // 20 segundos
+});
+onUnmounted(() => {
+  if (intervalId) {
+    clearInterval(intervalId);
+  }
+});
+
+
 </script>
 
 <template>
@@ -47,9 +75,10 @@ onMounted(cargarConfiguracion);
             <tr v-for="red in redes" :key="red.id">
               <td>{{ red.ssid }}</td>
               <td>
-                <span :class="['badge', red.estado.toLowerCase() === 'ok' ? 'bg-success' : 'bg-danger']">
+                <span :class="['badge', estadoClase(red.estado)]">
                   {{ red.estado }}
                 </span>
+
               </td>
               <td>{{ red.fecha }}</td>
             </tr>
@@ -142,6 +171,9 @@ onMounted(cargarConfiguracion);
   min-width: 50px;
 }
 
-.bg-success { background-color: #4caf50; } /* Verde para OK */
-.bg-danger { background-color: #d32f2f; }  /* Rojo para Failed/Error */
+.bg-success { background-color: #4caf50; } /* Verde */
+.bg-warning { background-color: #ff9800; } /* Naranja */
+.bg-danger  { background-color: #d32f2f; } /* Rojo */
+.bg-secondary { background-color: #757575; } /* Fallback */
+
 </style>
