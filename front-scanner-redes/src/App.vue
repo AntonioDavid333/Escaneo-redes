@@ -5,13 +5,39 @@ import { ref, onMounted, onUnmounted } from 'vue';
 const redes = ref([]);
 const cargando = ref(true);
 
+const formatearFecha = (fecha) => {
+  if (!fecha) return '-';
+  const date = new Date(fecha);
+  return new Intl.DateTimeFormat('es-ES', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  }).format(date);
+};
 
 const cargarConfiguracion = async () => {
   try {
     cargando.value = true;
     const response = await fetch('http://localhost:8080/configuracion-redes');
     if (response.ok) {
-      redes.value = await response.json();
+      const comprobaciones = await response.json();
+      
+      // Agrupar por SSID y mantener solo la última comprobación de cada red
+      const redesMapa = new Map();
+      comprobaciones.forEach(comp => {
+        const registroActual = redesMapa.get(comp.ssid);
+        if (!registroActual || new Date(comp.fecha) > new Date(registroActual.fecha)) {
+          redesMapa.set(comp.ssid, comp);
+        }
+      });
+      
+      // Convertir el mapa a array y ordenar por fecha descendente
+      redes.value = Array.from(redesMapa.values()).sort((a, b) => 
+        new Date(b.fecha) - new Date(a.fecha)
+      );
     }
   } catch (error) {
     console.error("Error al conectar con la API:", error);
@@ -80,7 +106,7 @@ onUnmounted(() => {
                 </span>
 
               </td>
-              <td>{{ red.fecha }}</td>
+              <td>{{ formatearFecha(red.fecha) }}</td>
             </tr>
             <tr v-if="redes.length === 0 && !cargando">
               <td colspan="3" style="text-align: center;">No se encontraron redes configuradas.</td>
