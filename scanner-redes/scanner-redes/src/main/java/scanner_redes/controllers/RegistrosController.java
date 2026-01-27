@@ -50,8 +50,10 @@ public class RegistrosController {
 //                red.getDnsServerPrimary());
 //        redes.add(red);
         Red redSave= new Red(red.getSsid(),
+                red.getUsuario(),
                 red.getPassword(),
-                red.getSeguridad());
+                red.getSeguridad()
+                );
 
         return  ResponseEntity.ok().body(redRepository.save(redSave));
     }
